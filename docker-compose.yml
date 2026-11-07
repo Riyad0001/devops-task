@@ -1,0 +1,16 @@
+services:
+  web:
+    build: .
+    image: devops-intern-task:local
+    container_name: devops-intern-task
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    # Container hardening
+    read_only: true
+    tmpfs:
+      - /tmp            # gunicorn writes worker heartbeat files here
+    cap_drop:
+      - ALL
+    security_opt:
+      - no-new-privileges:true

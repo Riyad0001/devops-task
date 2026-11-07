@@ -1,0 +1,11 @@
+.git
+.github
+docs
+**/__pycache__
+*.pyc
+.venv
+venv
+health_log.txt
+README.md
+docker-compose.yml
+Dockerfile
