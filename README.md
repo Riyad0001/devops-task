@@ -1,5 +1,7 @@
 # DevOps Intern Task
+[![CI](https://github.com/Riyad0001/devops-task/actions/workflows/ci.yml/badge.svg)](https://github.com/Riyad0001/devops-task/actions/workflows/ci.yml)
 
+**Docker Hub image:** https://hub.docker.com/repository/docker/riyad1234/devops-intern-task
 A small Flask service, containerized with Docker, built and published by a GitHub Actions pipeline, plus a Bash script that logs basic server health.
 
 `GET /` returns:
@@ -99,7 +101,7 @@ In the GitHub repo go to **Settings > Secrets and variables > Actions** and add:
 | `DOCKERHUB_USERNAME` | your Docker Hub username |
 | `DOCKERHUB_TOKEN` | a Docker Hub access token (Account Settings > Personal access tokens) |
 
-The image is then available as `docker pull <your-username>/devops-intern-task:latest`.
+The image is then available as `docker pull riyad1234/devops-intern-task:latest`.
 Make the Docker Hub repository public so reviewers can pull it.
 
 ## 4. Workflow diagram
@@ -109,5 +111,5 @@ Make the Docker Hub repository public so reviewers can pull it.
 ## 5. How would you deploy this container to AWS (EC2 or any VPS)?
 
 - **Provision the host:** launch a small EC2 instance (for example Amazon Linux 2023 or Ubuntu on `t3.micro`) and install Docker. The security group opens ports 80/443 to the world and port 22 only to my own IP; an IAM role is attached instead of storing AWS keys on the box.
-- **Run the published image:** the server pulls the image CI already pushed, rather than building anything on the host: `docker run -d --name app --restart unless-stopped -p 80:8080 <user>/devops-intern-task:latest`. For HTTPS I would put Nginx (with Let's Encrypt) or an Application Load Balancer in front and keep port 8080 private.
+- **Run the published image:** the server pulls the image CI already pushed, rather than building anything on the host: `docker run -d --name app --restart unless-stopped -p 80:8080 riyad1234/devops-intern-task:latest`. For HTTPS I would put Nginx (with Let's Encrypt) or an Application Load Balancer in front and keep port 8080 private.
 - **Automate releases:** add a deploy job to the workflow that connects to the instance (SSH with a key stored in GitHub Secrets, or AWS Systems Manager) and runs `docker pull` followed by restarting the container, deploying the immutable `:<sha>` tag so a bad release can be rolled back by redeploying the previous one. If the service grew, I would move to ECS Fargate to avoid managing servers.
