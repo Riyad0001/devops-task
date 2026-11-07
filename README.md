@@ -113,3 +113,10 @@ Make the Docker Hub repository public so reviewers can pull it.
 - **Provision the host:** launch a small EC2 instance (for example Amazon Linux 2023 or Ubuntu on `t3.micro`) and install Docker. The security group opens ports 80/443 to the world and port 22 only to my own IP; an IAM role is attached instead of storing AWS keys on the box.
 - **Run the published image:** the server pulls the image CI already pushed, rather than building anything on the host: `docker run -d --name app --restart unless-stopped -p 80:8080 riyad1234/devops-intern-task:latest`. For HTTPS I would put Nginx (with Let's Encrypt) or an Application Load Balancer in front and keep port 8080 private.
 - **Automate releases:** add a deploy job to the workflow that connects to the instance (SSH with a key stored in GitHub Secrets, or AWS Systems Manager) and runs `docker pull` followed by restarting the container, deploying the immutable `:<sha>` tag so a bad release can be rolled back by redeploying the previous one. If the service grew, I would move to ECS Fargate to avoid managing servers.
+
+
+## 5. How would you deploy this container to AWS (EC2 or any VPS)?
+
+- **Set up the server:** launch an EC2 instance and install Docker. In the security group, open ports 80/443 to everyone and SSH (22) only to my IP.
+- **Run the image:** pull the image that CI pushed to Docker Hub and start it with `docker run -d --restart unless-stopped -p 80:8080 riyad1234/devops-intern-task:latest`. For HTTPS, put Nginx or a load balancer in front.
+- **Automate it:** add a deploy step to GitHub Actions that connects over SSH (or AWS Systems Manager) and pulls the new `:<sha>` tag, so rolling back is just redeploying the previous tag.
