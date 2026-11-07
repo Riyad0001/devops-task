@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+.venv/
+venv/
+health_log.txt
+.DS_Store
