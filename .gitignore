@@ -4,3 +4,5 @@ __pycache__/
 venv/
 health_log.txt
 .DS_Store
+config.bat
+node_modules
