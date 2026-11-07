@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 250" role="img" aria-labelledby="t d" font-family="-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <title id="t">CI/CD workflow</title>
+  <desc id="d">Code commit, then GitHub Actions CI, then Docker Hub, then deployment onto a VPS.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#475569"/>
+    </marker>
+  </defs>
+
+  <rect width="1000" height="250" fill="#ffffff"/>
+
+  <!-- 1. Code commit -->
+  <rect x="30" y="60" width="190" height="110" rx="12" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <text x="125" y="95" text-anchor="middle" font-size="15" font-weight="700" fill="#1e3a8a">1. Code Commit</text>
+  <text x="125" y="122" text-anchor="middle" font-size="13" fill="#334155">Developer runs</text>
+  <text x="125" y="142" text-anchor="middle" font-size="13" fill="#334155" font-family="monospace">git push origin main</text>
+
+  <!-- 2. GitHub Actions -->
+  <rect x="280" y="60" width="190" height="110" rx="12" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+  <text x="375" y="95" text-anchor="middle" font-size="15" font-weight="700" fill="#4c1d95">2. GitHub Actions CI</text>
+  <text x="375" y="122" text-anchor="middle" font-size="13" fill="#334155">Lint (flake8, ShellCheck)</text>
+  <text x="375" y="142" text-anchor="middle" font-size="13" fill="#334155">Build image + smoke test</text>
+
+  <!-- 3. Docker Hub -->
+  <rect x="530" y="60" width="190" height="110" rx="12" fill="#ecfeff" stroke="#0891b2" stroke-width="2"/>
+  <text x="625" y="95" text-anchor="middle" font-size="15" font-weight="700" fill="#164e63">3. Docker Hub</text>
+  <text x="625" y="122" text-anchor="middle" font-size="13" fill="#334155">Public image registry</text>
+  <text x="625" y="142" text-anchor="middle" font-size="13" fill="#334155" font-family="monospace">:latest and :&lt;sha&gt;</text>
+
+  <!-- 4. VPS -->
+  <rect x="780" y="60" width="190" height="110" rx="12" fill="#f0fdf4" stroke="#16a34a" stroke-width="2"/>
+  <text x="875" y="95" text-anchor="middle" font-size="15" font-weight="700" fill="#14532d">4. Deploy to VPS</text>
+  <text x="875" y="122" text-anchor="middle" font-size="13" fill="#334155">AWS EC2 / any VPS</text>
+  <text x="875" y="142" text-anchor="middle" font-size="13" fill="#334155" font-family="monospace">docker pull + run</text>
+
+  <!-- Arrows -->
+  <line x1="222" y1="115" x2="278" y2="115" stroke="#475569" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="472" y1="115" x2="528" y2="115" stroke="#475569" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <line x1="722" y1="115" x2="778" y2="115" stroke="#475569" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <!-- Arrow labels -->
+  <text x="250" y="105" text-anchor="middle" font-size="11" fill="#475569">trigger</text>
+  <text x="500" y="105" text-anchor="middle" font-size="11" fill="#475569">push</text>
+  <text x="750" y="105" text-anchor="middle" font-size="11" fill="#475569">pull</text>
+
+  <!-- Automation bracket -->
+  <line x1="30" y1="200" x2="720" y2="200" stroke="#94a3b8" stroke-width="2"/>
+  <text x="375" y="224" text-anchor="middle" font-size="12" fill="#475569">Automated by .github/workflows/ci.yml</text>
+  <line x1="780" y1="200" x2="970" y2="200" stroke="#94a3b8" stroke-width="2" stroke-dasharray="6 4"/>
+  <text x="875" y="224" text-anchor="middle" font-size="12" fill="#475569">Manual step (can be automated)</text>
+</svg>
